@@ -1,0 +1,1 @@
+# KOGA-Kotlin-Generic-Adapter
