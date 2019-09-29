@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import br.com.cantinho.kogasample.listeners.BaseRecyclerListener
 import kotlinx.android.extensions.LayoutContainer
+import kotlin.reflect.KClass
 
 /**
  * Base ViewHolder to be used with the generic adapter.

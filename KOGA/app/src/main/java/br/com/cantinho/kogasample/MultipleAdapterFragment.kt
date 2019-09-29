@@ -1,12 +1,17 @@
 package br.com.cantinho.kogasample
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import br.com.cantinho.kogasample.ext.toast
+import br.com.cantinho.kogasample.listeners.OnRecyclerItemClickListener
+import br.com.cantinho.kogasample.sample.multiple.MultipleAdapter
+import br.com.cantinho.kogasample.util.generateMockUsers
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,7 +26,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [MultipleAdapterFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MultipleAdapterFragment : Fragment() {
+class MultipleAdapterFragment : Fragment(), OnRecyclerItemClickListener {
+
+    private lateinit var adapter: MultipleAdapter
+    private lateinit var recycler: RecyclerView
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,12 +43,39 @@ class MultipleAdapterFragment : Fragment() {
         }
     }
 
+    override fun onItemClick(position: Int) {
+        // get the User entity, associated with the clicked item.
+        val clickedUser = adapter.getItem(position)
+        // now you are free to do whatever you want with it.
+        // We just show a Toast message
+        toast(clickedUser.content)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_multiple_adapter, container, false)
+        val view = inflater.inflate(R.layout.fragment_multiple_adapter, container, false)
+        initViews(view)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // TODO in real life app it should be done by a Presenter or a ViewModel.
+        adapter.setItems(generateMockUsers(simple = false))
+    }
+
+    private fun initViews(view: View) {
+        context?.let {
+            recycler = view.findViewById(R.id.recycler)
+            recycler.layoutManager = LinearLayoutManager(activity)
+            recycler.setHasFixedSize(true)
+            recycler.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+            adapter = MultipleAdapter(it, this)
+            recycler.adapter = adapter
+        }
     }
 
     companion object {

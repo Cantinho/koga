@@ -1,21 +1,21 @@
 package br.com.cantinho.kogasample
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import br.com.cantinho.kogasample.ext.toast
 import br.com.cantinho.kogasample.listeners.OnRecyclerItemClickListener
 import br.com.cantinho.kogasample.model.CardContent
 import br.com.cantinho.kogasample.model.EmailAddress
 import br.com.cantinho.kogasample.model.NumericId
 import br.com.cantinho.kogasample.sample.simple.SimpleAdapter
+import br.com.cantinho.kogasample.util.generateMockUsers
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,40 +40,8 @@ class SimpleAdapterFragment : Fragment(), OnRecyclerItemClickListener {
         val clickedUser = adapter.getItem(position)
         // now you are free to do whatever you want with it.
         // We just show a Toast message
-        showToast(clickedUser.content)
+        toast(clickedUser.content)
     }
-
-    /**
-     * Shows a Toast message.
-     *
-     * @param message message to show
-     */
-    private fun showToast(message: String) {
-        Toast.makeText(this.activity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    /**
-     * Creates some mock users.
-     */
-    private fun generateMockUsers(): List<CardContent> {
-        val totalCards = 25
-        val users = ArrayList<CardContent>(totalCards)
-        for (i in 1..totalCards) {
-            val randomAge =  getRandomAge()
-            users.add(EmailAddress( "Card $i", NumericId(randomAge)))
-        }
-        return users
-    }
-
-    /**
-     * Generates random age between 0 and 110 (excluded)
-     *
-     * @return random age value
-     */
-    private fun getRandomAge(): Long {
-        return (Math.random() * 110).toLong()
-    }
-
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
