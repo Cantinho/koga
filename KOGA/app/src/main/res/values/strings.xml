@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KOGA - Kotlin Generic Adapter</string>
+    <string name="default_card_content">This is a content...</string>
+</resources>
