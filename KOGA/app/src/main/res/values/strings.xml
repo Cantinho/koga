@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">KOGA - Kotlin Generic Adapter</string>
     <string name="default_card_content">This is a content...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="go_to_simple_adapter">Go To Simple Adapter</string>
+    <string name="go_to_multiple_adapter">Go To Multiple Adapter</string>
+    <string name="multiple_adapter_not_implemented">Multiple Adapter is not implemented yet.</string>
 </resources>
