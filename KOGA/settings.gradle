@@ -1,0 +1,2 @@
+include ':app', ':koga'
+rootProject.name='KOGA - Kotlin Generic Adapter'
